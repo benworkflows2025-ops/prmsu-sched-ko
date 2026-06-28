@@ -1,0 +1,11 @@
+# The site lives in the prmsu-schedule-maker/ subfolder (static, no build step).
+# Tell Netlify to publish that folder so index.html is served at the site root.
+[build]
+  publish = "prmsu-schedule-maker"
+  command = ""
+
+# Friendly 404 -> send unknown paths back to the app's home page.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
