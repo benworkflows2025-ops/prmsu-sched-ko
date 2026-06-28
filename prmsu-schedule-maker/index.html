@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PRMSU Schedule Maker · Upload your COR</title>
+<link rel="icon" type="image/png" href="seal.png">
+<link rel="apple-touch-icon" href="seal.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav">
+    <div class="nav-in">
+      <div class="brand">
+        <img id="navSeal" alt="PRMSU">
+        <div>
+          <div class="brand-t">PRMSU Schedule Maker</div>
+          <div class="brand-s">Turn your Certificate of Registration into a clean weekly schedule</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="https://prmsu.edu.ph/" target="_blank" rel="noopener">PRMSU Website
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        <a href="https://icloudph.com/prmsu-main/sias/" target="_blank" rel="noopener">Student Portal
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ================= STEP 1 · UPLOAD ================= -->
+    <section id="stepUpload" class="step">
+      <div class="up-grid">
+
+        <div class="up-left">
+          <h1 class="hero-t">Upload your <span>COR</span>, get your schedule.</h1>
+          <p class="hero-s">Turn your Certificate of Registration into a clean, color-coded weekly schedule you can save or share. It reads everything right in your browser.</p>
+          <ul class="trust-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <div><b>Stays on your device</b><span>Your COR is read locally in your browser and never sent to a server.</span></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/><line x1="3" y1="3" x2="21" y2="21"/></svg>
+              <div><b>No database, no backend</b><span>Nothing is stored, saved, or collected. There is nothing to keep your data.</span></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              <div><b>Never sold or shared</b><span>No accounts, no tracking, no third parties. We never receive your COR.</span></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="up-right">
+          <div class="up-card">
+            <p class="hero-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Private by design
+            </p>
+
+            <label class="agree" id="agreeBox">
+              <input type="checkbox" id="agree">
+              <span>I understand my COR is processed only on my device, and I agree to the
+                <a href="terms.html" target="_blank" rel="noopener">Terms</a> and
+                <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+            </label>
+
+            <div id="drop" class="drop">
+              <input type="file" id="file" accept="application/pdf,.pdf" hidden>
+              <div class="drop-ico">
+                <svg class="ico-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
+              <div class="drop-t">Drag &amp; drop your COR (PDF) here</div>
+              <div class="drop-s">or <button type="button" class="link" id="browseBtn">browse files</button> · PDF only</div>
+            </div>
+
+            <p class="note">Tip: use the original PDF from the PRMSU student portal for the most accurate read. You'll review &amp; fix everything before the schedule is made.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= STEP 2 · PROCESSING ================= -->
+    <section id="stepProcessing" class="step hidden">
+      <div class="proc">
+        <div class="spinner"></div>
+        <div class="proc-t" id="procText">Reading your COR…</div>
+        <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+        <div class="proc-s" id="procSub">Reading your file. This can take a few seconds.</div>
+      </div>
+    </section>
+
+    <!-- ================= STEP 3 · REVIEW / EDIT ================= -->
+    <section id="stepReview" class="step hidden">
+      <div class="sec-head">
+        <h2>Review &amp; fix the details</h2>
+        <p>Reading isn't always perfect, so double-check the fields below, then generate your schedule.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Student info</h3>
+        <div class="form-grid">
+          <label>Full name<input id="f_name" type="text"></label>
+          <label>Student No.<input id="f_id" type="text"></label>
+          <label>Course &amp; Year<input id="f_course" type="text"></label>
+          <label>Section<input id="f_section" type="text"></label>
+          <label>Period<input id="f_period" type="text" placeholder="2026-2027 / First Semester"></label>
+          <label>COR Date<input id="f_date" type="text"></label>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Classes</h3>
+          <button class="btn small" id="addRow">+ Add class</button>
+        </div>
+        <div class="tbl-scroll">
+          <table class="edit-tbl" id="editTbl">
+            <thead>
+              <tr>
+                <th>Subject</th><th>Code</th><th>Units</th><th>Days</th>
+                <th>Start</th><th>End</th><th>Room</th><th>Type</th><th>Instructor</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="editBody"></tbody>
+          </table>
+        </div>
+        <p class="hint">Pick <b>days</b>, <b>start</b>, <b>end</b> and <b>type</b> from the dropdowns. Use <b>+ Add class</b> or the <b>×</b> button to adjust rows.</p>
+      </div>
+
+      <div class="row-actions between">
+        <button class="btn ghost" id="backUpload">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Start over</button>
+        <button class="btn" id="generateBtn">Generate schedule
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+    </section>
+
+    <!-- ================= STEP 4 · RESULT ================= -->
+    <section id="stepResult" class="step hidden">
+      <div class="row-actions between result-bar">
+        <button class="btn ghost" id="backReview">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Edit details</button>
+        <div class="result-actions">
+          <button class="btn ghost" id="shareBtn">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+            Share</button>
+          <button class="btn" id="saveBtn">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Save as JPEG</button>
+        </div>
+      </div>
+      <div id="cardHost"></div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <div class="foot-links">
+      <a href="https://prmsu.edu.ph/" target="_blank" rel="noopener">PRMSU Website</a>
+      <a href="https://icloudph.com/prmsu-main/sias/" target="_blank" rel="noopener">Student Portal</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    <div class="foot-note">Built for PRMSU students · Everything runs locally in your browser · Not an official university tool.</div>
+    <div class="foot-credit">Created by Red Pogi Lang.</div>
+    <div class="foot-meta">Version 1.0.0 · Last updated June 28, 2026</div>
+  </footer>
+
+<!-- libraries -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
