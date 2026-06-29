@@ -126,7 +126,9 @@ function parseFromItems(items){
 
   // header fields (search anywhere). pdf.js may split "Course/ Yr" and append
   // "Period:" onto the name line, so the patterns stop at the next label.
-  const all=rows.map(r=>r.cells.map(c=>c.str).join(" ")).join("\n");
+  // Sort each row's cells left-to-right: some CORs place labels and values a
+  // pixel apart vertically, which otherwise bunches labels before values.
+  const all=rows.map(r=>r.cells.slice().sort((a,b)=>a.x-b.x).map(c=>c.str).join(" ")).join("\n");
   const field=re=>{ const m=all.match(re); return m?m[1].trim():""; };
   const student={
     name:    field(/Name:\s*(.+?)(?:\s+Period:|\s+ID\b|\n|$)/i),
@@ -507,6 +509,10 @@ function fileName(){
   const who=($("f_name").value.trim().split(",")[0]||"schedule").replace(/[^A-Za-z0-9]+/g,"-");
   return `PRMSU-Schedule-${who}.jpg`;
 }
+// Export tuning: every download is the SAME crisp width regardless of phone/desktop,
+// and high quality (little JPEG compression).
+const EXPORT_WIDTH = 2400;   // target output width in px -> consistent, sharp
+const JPEG_QUALITY = 0.96;
 // Render the card to a full-width canvas. Expands to desktop width FIRST so the
 // whole week is captured even on a phone (grid is normally scrolled/clipped).
 function captureCard(){
@@ -514,23 +520,24 @@ function captureCard(){
     const card=$("scheduleCard"); if(!card){ reject(new Error("No schedule yet")); return; }
     const scroll=card.querySelector(".sc-scroll");
     const fullW=(parseInt(card.dataset.gridw,10)||680)+48;
+    const scale=Math.min(4, Math.max(2, EXPORT_WIDTH/fullW));   // same final width every time
     const saved=[];
     const tweak=(el,prop,val)=>{ saved.push([el,prop,el.style[prop]]); el.style[prop]=val; };
     tweak(card,"maxWidth","none"); tweak(card,"width",fullW+"px");
     if(scroll) tweak(scroll,"overflow","visible");
     const restore=()=>saved.forEach(([el,prop,val])=>el.style[prop]=val);
-    html2canvas(card,{scale:3,backgroundColor:"#ffffff",useCORS:true,windowWidth:Math.max(820,fullW+40)})
+    html2canvas(card,{scale,backgroundColor:"#ffffff",useCORS:true,windowWidth:Math.max(820,fullW+40)})
       .then(canvas=>{ restore(); resolve(canvas); })
       .catch(e=>{ restore(); reject(e); });
   });
 }
-const canvasToBlob=canvas=>new Promise(res=>canvas.toBlob(res,"image/jpeg",0.95));
+const canvasToBlob=canvas=>new Promise(res=>canvas.toBlob(res,"image/jpeg",JPEG_QUALITY));
 
 function saveJPEG(btn){
   const label=btn.innerHTML; btn.textContent="Saving…"; btn.disabled=true;
   captureCard().then(canvas=>{
     const a=document.createElement("a");
-    a.download=fileName(); a.href=canvas.toDataURL("image/jpeg",0.95); a.click();
+    a.download=fileName(); a.href=canvas.toDataURL("image/jpeg",JPEG_QUALITY); a.click();
     btn.innerHTML=label; btn.disabled=false;
   }).catch(err=>{ alert("Couldn't save: "+err); btn.innerHTML=label; btn.disabled=false; });
 }
@@ -550,6 +557,17 @@ function shareSchedule(btn){
     alert("Direct sharing isn't supported on this browser, so the image was saved to your device. You can share it from your photos or downloads.");
   }).catch(err=>{ alert("Couldn't prepare the image: "+err); })
     .finally(()=>{ btn.innerHTML=label; btn.disabled=false; });
+}
+
+// Share the TOOL link (so classmates can use it too).
+function shareWebsite(btn){
+  const url="https://prmsu-sched.netlify.app/";
+  const data={ title:"PRMSU Schedule Maker", text:"Turn your COR into a clean weekly schedule:", url };
+  if(navigator.share){ navigator.share(data).catch(()=>{}); return; }
+  const flash=msg=>{ const h=btn.innerHTML; btn.textContent=msg; btn.disabled=true; setTimeout(()=>{btn.innerHTML=h; btn.disabled=false;},1800); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(()=>flash("Link copied!")).catch(()=>prompt("Copy this link:",url));
+  } else { prompt("Copy this link:",url); }
 }
 
 /* =========================================================================
@@ -621,6 +639,7 @@ if (typeof document !== "undefined") {
     $("generateBtn").onclick=()=>{ renderSchedule(collectReview()); show("stepResult"); };
     $("saveBtn").onclick=function(){ saveJPEG(this); };
     $("shareBtn").onclick=function(){ shareSchedule(this); };
+    const stb=$("shareToolBtn"); if(stb) stb.onclick=function(){ shareWebsite(this); };
   });
 }
 
