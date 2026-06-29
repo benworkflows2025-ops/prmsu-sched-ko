@@ -399,6 +399,9 @@ function renderSchedule(data){
   const h12=h=>(h%12)||12, ampm=h=>h<12?"AM":"PM";
   const clk=v=>{const h=Math.floor(v/60),m=v%60;return h12(h)+":"+String(m).padStart(2,"0");};
   const shortRoom=r=>(r||"").replace(/^CCIT\s+/i,"");
+  // compact name for the grid blocks: long official names like
+  // "...Health and Fitness 3 (PATHFit 3): Dance" -> "PATHFit 3: Dance"
+  const gridName=n=>{ n=(n||"").trim(); const m=n.match(/\(([^)]+)\)\s*:?\s*(.*)$/); return m?(m[1]+(m[2]?": "+m[2]:"")).trim():n; };
 
   // header time labels
   let labels="";
@@ -417,8 +420,8 @@ function renderSchedule(data){
     evs.filter(x=>x.day===d).forEach(x=>{
       const col2=colorOf(x.c.code||x.c.name);
       col+=`<div class="ev" style="top:${top(x.s)}px;height:${dur(x.s,x.e)}px;background:${col2.fill};border-left-color:${col2.bd};color:${col2.tx}">`+
-           `<div class="ev-t">${esc(x.c.name)}</div>`+
-           `<div class="ev-m">${clk(x.s)}–${clk(x.e)}${x.c.room?" · "+esc(shortRoom(x.c.room)):""}</div></div>`;
+           `<div class="ev-t">${esc(gridName(x.c.name))}</div>`+
+           `<div class="ev-m">${clk(x.s)}–${clk(x.e)}${x.c.room?" · <b>"+esc(shortRoom(x.c.room))+"</b>":""}</div></div>`;
     });
     col+=`</div>`; gbody+=col;
   });

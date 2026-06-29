@@ -181,9 +181,12 @@ input:focus,select:focus{outline:2px solid var(--blue);outline-offset:-1px;borde
 .sc-col{position:relative;border-left:1px solid var(--line);background:repeating-linear-gradient(to bottom,transparent 0,transparent 63px,var(--line2) 63px,var(--line2) 64px)}
 .sc-col.free{background:repeating-linear-gradient(to bottom,transparent 0,transparent 63px,var(--line2) 63px,var(--line2) 64px),repeating-linear-gradient(45deg,#F4F6F9 0,#F4F6F9 9px,#FBFCFE 9px,#FBFCFE 18px)}
 .sc-freenote{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-90deg);color:#B7C2D2;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;white-space:nowrap}
-.ev{position:absolute;left:5px;right:5px;border-radius:9px;padding:6px 8px 5px;border-left:3px solid;overflow:hidden;box-shadow:0 1px 0 rgba(16,36,59,.04)}
-.ev-t{font-weight:700;font-size:12px;line-height:1.15;letter-spacing:-.01em}
-.ev-m{font-size:10.5px;line-height:1.2;margin-top:3px;opacity:.82;font-weight:500}
+.ev{position:absolute;left:5px;right:5px;border-radius:9px;padding:6px 8px 6px;border-left:3px solid;overflow:hidden;box-shadow:0 1px 0 rgba(16,36,59,.04);display:flex;flex-direction:column}
+/* name clamps to 2 lines; the time + room line is pinned to the bottom so it
+   is ALWAYS visible even in short blocks (you can read the room at a glance). */
+.ev-t{font-weight:700;font-size:12px;line-height:1.14;letter-spacing:-.01em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.ev-m{font-size:10px;line-height:1.22;margin-top:auto;padding-top:3px;opacity:.95;font-weight:600}
+.ev-m b{font-weight:800}
 .sc-cap{margin:14px 2px 0;color:var(--muted);font-size:11.5px}
 
 .sc-leg{margin:4px 24px 4px;padding-top:20px;border-top:1px solid var(--line)}
