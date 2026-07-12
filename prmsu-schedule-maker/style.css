@@ -216,6 +216,88 @@ input:focus,select:focus{outline:2px solid var(--blue);outline-offset:-1px;borde
 .foot-credit{margin-top:10px;font-weight:700;color:var(--ink)}
 .foot-meta{margin-top:5px;font-size:11px;color:#9AA7BC}
 
+/* =====================================================
+   FLOATING HEARTS + VISITS  (shared, from stats.js)
+   ===================================================== */
+.stat-fab{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.sf-heart{appearance:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  background:var(--blue);color:#fff;font:inherit;font-weight:800;font-size:14px;
+  padding:10px 15px 10px 13px;border-radius:999px;
+  box-shadow:0 12px 28px -10px rgba(16,36,59,.55),0 2px 6px rgba(16,36,59,.25);
+  transition:transform .12s ease,background .15s}
+.sf-heart svg{width:20px;height:20px;fill:rgba(255,255,255,.55);transition:fill .18s,transform .2s}
+.sf-heart:hover{background:var(--blue-d)}
+.sf-heart:active{transform:scale(.94)}
+.sf-heart.on svg{fill:#FF4D6D}
+.sf-heart.pop svg{animation:sfpop .42s ease}
+@keyframes sfpop{0%{transform:scale(1)}40%{transform:scale(1.4)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+.sf-views{display:inline-flex;align-items:center;gap:7px;background:#fff;color:var(--muted);
+  font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:999px;
+  box-shadow:0 8px 20px -10px rgba(16,36,59,.45),inset 0 0 0 1px var(--line)}
+.sf-views svg{width:15px;height:15px;color:var(--blue)}
+.sf-n{font-variant-numeric:tabular-nums;line-height:1}
+
+/* ---- welcome popup ---- */
+.sf-modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
+.sf-modal.show{display:flex}
+.sf-back{position:absolute;inset:0;background:rgba(10,20,40,.55);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.sf-card{position:relative;background:#fff;border-radius:22px;max-width:410px;width:100%;
+  padding:26px 22px 20px;box-shadow:0 34px 80px -24px rgba(10,20,40,.62);animation:sfup .3s ease}
+@keyframes sfup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.sf-xbtn{position:absolute;top:11px;right:11px;width:32px;height:32px;border:0;border-radius:50%;
+  background:#F2F5FA;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.sf-xbtn svg{width:16px;height:16px}
+.sf-xbtn:hover{background:#E7ECF4;color:var(--ink)}
+.sf-view{text-align:center}
+.sf-emoji{font-size:38px;line-height:1}
+.sf-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:23px;letter-spacing:-.02em;margin:10px 0 0}
+.sf-text{color:var(--muted);font-size:14px;line-height:1.55;margin:9px 4px 0}
+.sf-text b{color:var(--ink)}
+.sf-blabel{text-align:left;font-size:12px;font-weight:700;color:var(--ink);margin:18px 2px 0;letter-spacing:.01em}
+.sf-branches{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sf-branch{appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink);
+  border-radius:999px;padding:8px 13px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;transition:.14s}
+.sf-branch:hover{border-color:#B9C6DC;background:#F7FAFF}
+.sf-branch.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
+.sf-actions{display:flex;gap:10px;margin-top:20px}
+.sf-actions .btn{flex:1;min-width:0;padding:12px 14px}
+.sf-actions .btn svg{width:17px;height:17px;fill:#fff;flex:0 0 auto}
+.sf-mini{font-size:11px;color:#9AA7BC;line-height:1.5;margin:14px 6px 2px}
+.sf-thanks{padding:14px 4px 10px}
+
+/* ---- public campus leaderboard (transparency) ---- */
+.sf-board{max-width:1000px;margin:6px auto 0;padding:0 20px}
+.sf-board-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 18px 15px}
+.sf-board-h{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:14.5px;color:var(--ink);margin:0 0 14px}
+.sf-board-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.sf-row{display:flex;align-items:center;gap:10px;font-size:13px}
+.sf-rk{width:19px;height:19px;flex:0 0 auto;border-radius:50%;background:#EEF2F7;color:var(--muted);font-size:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.sf-row.lead .sf-rk{background:var(--gold);color:#5A4300}
+.sf-nm{flex:0 0 auto;width:118px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sf-track{flex:1;height:8px;background:#EDF1F6;border-radius:999px;overflow:hidden}
+.sf-track i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#4b7bea);border-radius:999px}
+.sf-row.lead .sf-track i{background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+.sf-ct{flex:0 0 auto;min-width:44px;text-align:right;font-size:12.5px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.sf-ch{color:#E4557A;font-weight:700;margin-left:3px;font-size:11px}
+.sf-board-n{font-size:11.5px;color:#9AA7BC;line-height:1.5;margin:14px 2px 0}
+@media (max-width:600px){
+  .sf-board{padding:0 14px}
+  .sf-nm{width:92px}
+}
+
+@media (max-width:560px){
+  .stat-fab{right:12px;bottom:12px;gap:8px}
+  .sf-heart{padding:9px 13px 9px 11px;font-size:13.5px}
+  .sf-heart svg{width:18px;height:18px}
+  /* welcome becomes a bottom sheet, easy for the thumb */
+  .sf-modal{align-items:flex-end;padding:0}
+  .sf-card{max-width:none;border-radius:22px 22px 0 0;padding:24px 18px calc(22px + env(safe-area-inset-bottom));animation:sfsheet .32s ease}
+  /* stack actions: big "support" button on top, "later" below */
+  .sf-actions{flex-direction:column-reverse;gap:9px}
+  .sf-actions .btn{width:100%;flex:none}
+}
+@keyframes sfsheet{from{transform:translateY(100%)}to{transform:none}}
+
 /* ---------------- legal pages ---------------- */
 .legal{max-width:760px}
 .legal h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:32px;letter-spacing:-.02em;margin:6px 0 4px}
