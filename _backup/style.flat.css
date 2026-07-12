@@ -26,59 +26,6 @@ body{
 .wrap{max-width:1000px;margin:0 auto;padding:30px 20px 50px}
 .step{animation:fade .35s ease}
 
-/* =====================================================
-   HERO / COVER BANNER  (animated, pure CSS)
-   ===================================================== */
-.cover{position:relative;overflow:hidden;color:#fff;isolation:isolate;
-  background:
-    radial-gradient(92% 130% at 88% -25%, #1E56BC 0%, rgba(30,86,188,0) 52%),
-    radial-gradient(70% 120% at 6% 130%, #0A2A66 0%, rgba(10,42,102,0) 55%),
-    linear-gradient(135deg,#0C2E6E 0%,#103A8A 52%,#12409e 100%)}
-/* faint weekly-grid motif, slowly drifting, faded toward the left */
-.cover-grid{position:absolute;inset:-2px;pointer-events:none;opacity:.13;z-index:-1;
-  background-image:
-    repeating-linear-gradient(90deg,transparent 0 73px,rgba(255,255,255,.75) 73px 74px),
-    repeating-linear-gradient(0deg,transparent 0 29px,rgba(255,255,255,.6) 29px 30px);
-  -webkit-mask-image:linear-gradient(105deg,transparent 40%,#000 95%);
-          mask-image:linear-gradient(105deg,transparent 40%,#000 95%);
-  animation:cover-slide 24s linear infinite}
-@keyframes cover-slide{to{background-position:73px 0,0 30px}}
-/* drifting gold orbs */
-.cover-orb{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;filter:blur(1px);
-  background:radial-gradient(circle at 35% 35%,rgba(245,184,46,.5),rgba(245,184,46,0) 70%)}
-.cover-orb.o1{width:130px;height:130px;top:-34px;left:11%;animation:orb 17s ease-in-out infinite}
-.cover-orb.o2{width:72px;height:72px;bottom:-16px;left:45%;animation:orb 23s ease-in-out infinite reverse}
-.cover-orb.o3{width:96px;height:96px;top:16%;right:24%;animation:orb 20s ease-in-out infinite}
-@keyframes orb{0%,100%{transform:translate(0,0)}50%{transform:translate(16px,-18px)}}
-
-.cover-in{position:relative;z-index:1;max-width:1000px;margin:0 auto;
-  padding:34px 20px 30px;display:flex;align-items:center;gap:24px}
-.cover-seal{width:84px;height:84px;flex:0 0 auto;border-radius:50%;background:#fff;padding:6px;object-fit:contain;
-  box-shadow:0 12px 32px rgba(0,0,0,.36);animation:cover-pop .7s cubic-bezier(.2,.85,.25,1.05) both}
-.cover-txt{min-width:0}
-.cover-eyebrow{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#F5C64E;font-weight:800;
-  animation:cover-up .6s .04s both}
-.cover-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;letter-spacing:-.025em;
-  font-size:clamp(26px,4.7vw,40px);line-height:1.04;margin:7px 0 0;animation:cover-up .6s .12s both}
-.cover-title .g{color:#F5B82E}
-.cover-sub{font-size:15px;line-height:1.5;color:#CBD8F2;margin:11px 0 0;max-width:544px;animation:cover-up .6s .2s both}
-.cover-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;animation:cover-up .6s .28s both}
-.cover-chips span{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#E7EEFB;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 13px;border-radius:999px}
-.cover-chips span::before{content:"";width:6px;height:6px;border-radius:50%;background:#F5B82E;flex:0 0 auto}
-.cover-rail{position:relative;z-index:1;height:4px;background:linear-gradient(90deg,var(--gold),#FFD56A 50%,var(--gold))}
-@keyframes cover-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes cover-pop{from{opacity:0;transform:scale(.6) rotate(-10deg)}to{opacity:1;transform:none}}
-@media (max-width:600px){
-  .cover-in{padding:24px 16px 22px;gap:15px}
-  .cover-seal{width:58px;height:58px}
-}
-
-/* intro heading that replaced the old left-column hero text */
-.up-h{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(20px,3vw,26px);
-  letter-spacing:-.02em;margin:0;line-height:1.1}
-.up-lead{color:var(--muted);font-size:14.5px;line-height:1.55;margin:11px 0 0;max-width:520px}
-
 /* upload landing: balanced two-column hero (copy left, upload card right) */
 .up-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center;margin-top:10px}
 .up-left{min-width:0}
@@ -89,12 +36,7 @@ body{
 .up-card .note{margin:14px 4px 0}
 
 .trust-list{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
-.trust-list li{display:flex;gap:13px;align-items:flex-start;animation:cover-up .55s both}
-.trust-list li:nth-child(1){animation-delay:.12s}
-.trust-list li:nth-child(2){animation-delay:.22s}
-.trust-list li:nth-child(3){animation-delay:.32s}
-.trust-list svg{transition:transform .2s}
-.trust-list li:hover svg{transform:scale(1.12)}
+.trust-list li{display:flex;gap:13px;align-items:flex-start}
 .trust-list svg{width:22px;height:22px;color:var(--blue);flex:0 0 auto;margin-top:2px}
 .trust-list b{display:block;font-size:14px;margin-bottom:2px}
 .trust-list span{font-size:12.5px;color:var(--muted);line-height:1.5}
@@ -116,12 +58,9 @@ body{
   padding:34px 22px;text-align:center;cursor:pointer;transition:.18s;
 }
 .drop:hover,.drop.over{border-color:var(--blue);background:#F7FAFF}
-.drop.over{box-shadow:0 0 0 4px rgba(16,58,138,.12);transform:translateY(-1px)}
 .drop.disabled{opacity:.5;filter:grayscale(.3)}
 .drop.disabled .drop-t,.drop.disabled .drop-ico{color:var(--muted)}
-.drop-ico{font-size:42px;line-height:1;animation:bob 3.4s ease-in-out infinite}
-.drop:hover .drop-ico{animation-play-state:paused}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.drop-ico{font-size:42px;line-height:1}
 .drop-t{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:19px;margin-top:12px}
 .drop-s{color:var(--muted);font-size:13.5px;margin-top:6px}
 .link{background:none;border:0;color:var(--blue);font:inherit;font-weight:700;cursor:pointer;text-decoration:underline;padding:0}
@@ -148,24 +87,20 @@ body{
   font:inherit;font-weight:700;font-size:14px;padding:11px 20px;border-radius:999px;cursor:pointer;transition:.15s;
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
 }
-.btn:hover{background:var(--blue-d);transform:translateY(-1px);box-shadow:0 10px 20px -10px rgba(16,36,59,.55)}
-.btn:active{transform:translateY(0)}
-.btn:disabled{opacity:.55;cursor:default;transform:none;box-shadow:none}
+.btn:hover{background:var(--blue-d)}
+.btn:disabled{opacity:.55;cursor:default}
 .btn.ghost{background:#fff;color:var(--blue);box-shadow:inset 0 0 0 1.5px #CBD7E8}
 .btn.ghost:hover{background:#F2F6FC}
 .btn.small{padding:7px 13px;font-size:12.5px}
 
 /* ---------------- processing ---------------- */
 .proc{text-align:center;padding:50px 20px}
-.spinner{position:relative;width:54px;height:54px;border-radius:50%;border:5px solid #DCE4F0;border-top-color:var(--blue);margin:0 auto;animation:spin 1s linear infinite}
-.spinner::after{content:"";position:absolute;inset:4px;border-radius:50%;border:4px solid transparent;border-bottom-color:var(--gold);animation:spin 1.7s linear infinite reverse}
+.spinner{width:48px;height:48px;border-radius:50%;border:5px solid #DCE4F0;border-top-color:var(--blue);margin:0 auto;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .proc-t{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:20px;margin-top:20px}
 .proc-s{color:var(--muted);font-size:13px;margin-top:8px}
 .bar{height:8px;background:#DCE4F0;border-radius:999px;max-width:340px;margin:18px auto 0;overflow:hidden}
-.bar-fill{position:relative;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--gold));transition:width .25s;overflow:hidden}
-.bar-fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:translateX(-100%);animation:shimmer 1.25s linear infinite}
-@keyframes shimmer{to{transform:translateX(100%)}}
+.bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--gold));transition:width .25s}
 
 /* ---------------- review ---------------- */
 .sec-head h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:26px;margin:0;letter-spacing:-.02em}
@@ -415,15 +350,4 @@ input:focus,select:focus{outline:2px solid var(--blue);outline-offset:-1px;borde
 @media (max-width:380px){
   .nav-links{gap:10px;font-size:12px}
   .hero-t{font-size:24px}
-  .cover-title{font-size:23px}
-}
-
-/* respect visitors who prefer no motion: kill loops + entrances */
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.001ms !important;
-    animation-iteration-count:1 !important;
-    transition-duration:.001ms !important;
-    scroll-behavior:auto !important;
-  }
 }
