@@ -276,7 +276,7 @@
     if (!foot || !rows.length) { if (existing) existing.parentNode.removeChild(existing); return; }
 
     rows.sort(function (a, b) { return b.responses - a.responses || (b.hearts || 0) - (a.hearts || 0); });
-    var top = rows.slice(0, 6);
+    var top = rows.slice(0, 10);     // show every campus (there are only a handful)
     var max = Number(top[0].responses) || 1;
 
     var items = top.map(function (r, i) {
