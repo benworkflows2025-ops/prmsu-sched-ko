@@ -308,6 +308,7 @@
   function boot() {
     document.body.appendChild(fab);
     document.body.appendChild(modal);
+    document.body.classList.add('has-fab');   // lets CSS add bottom clearance on mobile
 
     heartBtn = document.getElementById('sfHeart');
     heartN   = document.getElementById('sfHearts');

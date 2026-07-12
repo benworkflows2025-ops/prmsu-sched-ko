@@ -70,8 +70,13 @@ body{
 @keyframes cover-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes cover-pop{from{opacity:0;transform:scale(.6) rotate(-10deg)}to{opacity:1;transform:none}}
 @media (max-width:600px){
-  .cover-in{padding:24px 16px 22px;gap:15px}
-  .cover-seal{width:58px;height:58px}
+  /* stack the seal on top so it sits with the title, not floating mid-text */
+  .cover-in{flex-direction:column;align-items:flex-start;gap:13px;padding:22px 16px 20px}
+  .cover-seal{width:54px;height:54px}
+  .cover-title{font-size:clamp(24px,7.6vw,32px);line-height:1.06}
+  .cover-sub{font-size:13.5px;margin-top:9px}
+  .cover-chips{gap:7px;margin-top:14px}
+  .cover-chips span{padding:5px 11px;font-size:11.5px}
 }
 
 /* intro heading that replaced the old left-column hero text */
@@ -347,9 +352,15 @@ input:focus,select:focus{outline:2px solid var(--blue);outline-offset:-1px;borde
 .sf-board-n{font-size:11.5px;color:#9AA7BC;line-height:1.5;margin:14px 2px 0}
 @media (max-width:600px){
   .sf-board{padding:0 14px}
-  .sf-nm{width:92px}
+  .sf-nm{width:106px;font-size:12.5px}
+  .sf-board-card{padding:16px 15px 14px}
+  .sf-row{gap:8px}
 }
 
+/* on phones, keep the floating widget from covering the last bit of content */
+@media (max-width:600px){
+  body.has-fab{padding-bottom:92px}
+}
 @media (max-width:560px){
   .stat-fab{right:12px;bottom:12px;gap:8px}
   .sf-heart{padding:9px 13px 9px 11px;font-size:13.5px}
