@@ -76,7 +76,7 @@
     return n.toLocaleString('en-US');
   }
   function shortName(b) {
-    return b === 'Other' ? 'Iba pang campus' : b.replace(' (Main Campus)', ' (Main)');
+    return b === 'Other' ? 'Other campus' : b.replace(' (Main Campus)', ' (Main)');
   }
 
   var HEART_SVG =
@@ -98,7 +98,7 @@
   fab.className = 'stat-fab';
   fab.innerHTML =
     '<button type="button" class="sf-heart" id="sfHeart" aria-pressed="false" ' +
-        'aria-label="Like this tool" title="Suportahan ang tool na ito">' +
+        'aria-label="Like this tool" title="Support this tool">' +
       HEART_SVG + '<span class="sf-n" id="sfHearts">–</span>' +
     '</button>' +
     '<div class="sf-views" id="sfViews" title="Ramonians who opened this tool">' +
@@ -160,30 +160,30 @@
   modal.className = 'sf-modal';
   modal.setAttribute('role', 'dialog');
   modal.setAttribute('aria-modal', 'true');
-  modal.setAttribute('aria-label', 'Kumusta, Ramonian?');
+  modal.setAttribute('aria-label', 'Hi there, Ramonian!');
   modal.innerHTML =
     '<div class="sf-back" data-close="1"></div>' +
     '<div class="sf-card">' +
-      '<button type="button" class="sf-xbtn" data-close="1" aria-label="Isara">' +
+      '<button type="button" class="sf-xbtn" data-close="1" aria-label="Close">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>' +
       '</button>' +
       '<div class="sf-view sf-ask">' +
         '<div class="sf-emoji">💙</div>' +
-        '<h2 class="sf-title">Kumusta, Ramonian?</h2>' +
-        '<p class="sf-text">Libre at gawa lang ng kapwa estudyante ang tool na ito. ' +
-          'Kung nakatulong, mag-<b>heart</b> ka para malaman naming ginagamit mo — at suporta na rin sa gumawa.</p>' +
-        '<div class="sf-blabel">Taga-saang campus ka?</div>' +
+        '<h2 class="sf-title">Hi there, Ramonian!</h2>' +
+        '<p class="sf-text">This tool is free and made by a fellow student. ' +
+          'If it helped you, tap the <b>heart</b> so we know it is being used, and to support the maker.</p>' +
+        '<div class="sf-blabel">Which campus are you from?</div>' +
         '<div class="sf-branches" id="sfBranches"></div>' +
         '<div class="sf-actions">' +
-          '<button type="button" class="btn ghost" data-close="1">Maya na</button>' +
-          '<button type="button" class="btn" id="sfLike">' + HEART_SVG + ' I-heart at suportahan</button>' +
+          '<button type="button" class="btn ghost" data-close="1">Not now</button>' +
+          '<button type="button" class="btn" id="sfLike">' + HEART_SVG + ' Heart &amp; support</button>' +
         '</div>' +
-        '<p class="sf-mini">Walang login. Hindi ka namimarkahan. Ang COR mo ay nananatili sa phone mo.</p>' +
+        '<p class="sf-mini">No login. You are not tracked. Your COR stays on your phone.</p>' +
       '</div>' +
       '<div class="sf-view sf-thanks" hidden>' +
         '<div class="sf-emoji">🎉</div>' +
-        '<h2 class="sf-title">Salamat, Ramonian!</h2>' +
-        '<p class="sf-text" id="sfThanksText">Ang bait mo. Ituloy mo lang ang pag-aaral. 💙</p>' +
+        '<h2 class="sf-title">Thank you, Ramonian!</h2>' +
+        '<p class="sf-text" id="sfThanksText">You are the best. Good luck with your studies. 💙</p>' +
       '</div>' +
     '</div>';
 
@@ -194,7 +194,7 @@
       var el = document.createElement('button');
       el.type = 'button';
       el.className = 'sf-branch' + (b === branch ? ' sel' : '');
-      el.textContent = b === 'Other' ? 'Iba pang campus' : b;
+      el.textContent = b === 'Other' ? 'Other campus' : b;
       el.setAttribute('data-branch', b);
       el.setAttribute('aria-pressed', b === branch ? 'true' : 'false');
       el.onclick = function () {
@@ -252,8 +252,8 @@
     var thx = modal.querySelector('.sf-thanks');
     var txt = modal.querySelector('#sfThanksText');
     if (txt && branch && branch !== 'Other') {
-      txt.textContent = 'Isa ka nang Ramonian mula ' + branch.replace(' (Main Campus)', '') +
-                        ' na sumuporta. 💙';
+      txt.textContent = 'One more Ramonian from ' + branch.replace(' (Main Campus)', '') +
+                        ' supporting this. 💙';
     }
     if (ask) ask.hidden = true;
     if (thx) thx.hidden = false;
@@ -295,9 +295,9 @@
     sec.className = 'sf-board';
     sec.innerHTML =
       '<div class="sf-board-card">' +
-        '<div class="sf-board-h">Saang campus galing ang mga Ramonian dito? 💙</div>' +
+        '<div class="sf-board-h">Which campus uses this the most? 💙</div>' +
         '<ol class="sf-board-list">' + items + '</ol>' +
-        '<div class="sf-board-n">Anonymous. Base sa mga sumagot sa "Taga-saang campus ka?" - walang pangalan, bilang lang kada campus.</div>' +
+        '<div class="sf-board-n">Anonymous. Based on who picked their campus in the welcome popup. No names, just a count per campus.</div>' +
       '</div>';
     if (!existing) foot.parentNode.insertBefore(sec, foot);
   }
