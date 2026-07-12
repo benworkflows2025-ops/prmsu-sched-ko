@@ -24,12 +24,16 @@
   var K = {
     hearted:  'sched_hearted',   // '1' once this browser has liked
     viewed:   'sched_viewed',    // '1' once this browser was counted as a visit
-    welcomed: 'sched_welcomed',  // '1' once the welcome popup was seen
     surveyed: 'sched_surveyed',  // '1' once this browser's campus was recorded
     branch:   'sched_branch',    // remembered campus choice
     ch:       'sched_c_hearts',  // cached last-known counts (instant paint)
     cv:       'sched_c_views'
   };
+
+  // The welcome popup keeps showing until the visitor actually ANSWERS - i.e.
+  // hearts the tool or picks a campus. Just dismissing it ("Not now" / X) does
+  // NOT count, so it will greet them again next visit.
+  function hasAnswered() { return lg(K.hearted) === '1' || lg(K.surveyed) === '1'; }
 
   function lg(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function ls(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -240,10 +244,9 @@
   }
 
   function closeWelcome() {
-    submitSurveyOnce();
+    submitSurveyOnce();          // if they picked a campus, that counts as answered
     modal.classList.remove('show');
     releaseModal();
-    ls(K.welcomed, '1');
   }
 
   function thankAndClose() {
@@ -257,7 +260,6 @@
     }
     if (ask) ask.hidden = true;
     if (thx) thx.hidden = false;
-    ls(K.welcomed, '1');
     setTimeout(function () { modal.classList.remove('show'); releaseModal(); }, 1600);
   }
 
@@ -345,8 +347,9 @@
       loadBoard();
     }
 
-    // Show the welcome once per browser, a beat after load so it isn't jarring.
-    if (lg(K.welcomed) !== '1') {
+    // Greet the visitor until they actually answer (heart or pick a campus).
+    // Dismissing without answering means they will be greeted again next visit.
+    if (!hasAnswered()) {
       setTimeout(openWelcome, 900);
     }
   }
