@@ -28,9 +28,10 @@
     border-radius:4.5mm;background:#fff;box-shadow:0 0 0 1px #E7ECF4;color:#12224a}
 
   /* ---- blue header ---- */
+  /* SOLID blue on purpose: gradients get exported as PDF "shadings" that some
+     viewers/printers render wrong (pink). A flat color renders identically. */
   .s-head{position:relative;overflow:hidden;color:#fff;padding:2.8mm 3.8mm 3mm;
-    background:radial-gradient(120% 150% at 88% -30%,#1E56BC 0%,rgba(30,86,188,0) 55%),
-      linear-gradient(135deg,#0C2E6E 0%,#103A8A 60%,#12409e 100%)}
+    background:#123f9e}
   .s-grid{position:absolute;inset:0;opacity:.14;
     background-image:repeating-linear-gradient(90deg,transparent 0 5mm,rgba(255,255,255,.7) 5mm,rgba(255,255,255,.7) calc(5mm + .3mm)),
       repeating-linear-gradient(0deg,transparent 0 2.4mm,rgba(255,255,255,.55) 2.4mm,rgba(255,255,255,.55) calc(2.4mm + .3mm));
