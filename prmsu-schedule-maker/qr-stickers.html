@@ -41,12 +41,14 @@
   .s-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3mm 4mm 2mm;text-align:center}
   .s-scan{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:3.4mm;color:#12224a;margin-bottom:2mm}
   .s-scan span{color:#D99B1C}
-  .s-qr{position:relative;width:41mm;height:41mm}
+  /* white panel + 4-module quiet zone so the QR is not "cut" and scans well */
+  .s-qr{position:relative;width:43mm;height:43mm;background:#fff;border-radius:2.5mm;padding:4mm;
+    box-shadow:0 0 0 1px #E7ECF4}
   .s-qr svg{width:100%;height:100%;display:block}
   .s-qseal{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-    width:8.4mm;height:8.4mm;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;
-    box-shadow:0 0 0 1.4mm #fff}
-  .s-qseal img{width:7mm;height:7mm}
+    width:6.8mm;height:6.8mm;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 1.1mm #fff}
+  .s-qseal img{width:5.6mm;height:5.6mm}
   .s-desc{font-size:2.4mm;line-height:1.35;color:#5C6B82;margin-top:2.2mm;max-width:66mm}
 
   /* ---- url footer ---- */
@@ -70,13 +72,13 @@
     <div class="cell"><div class="sticker">
       <div class="s-head">
         <div class="s-grid"></div>
-        <div class="s-brandrow"><img src="seal.png" alt=""><b>PRMSU SCHEDULE MAKER<small>Unofficial · gawa ng estudyante</small></b></div>
-        <div class="s-hook">Gulo ang <em>schedule</em> mo, Ramonian?</div>
+        <div class="s-brandrow"><img src="seal.png" alt=""><b>PRMSU SCHEDULE MAKER<small>Unofficial · student-made</small></b></div>
+        <div class="s-hook">Class schedule<br>a <em>mess</em>?</div>
       </div>
       <div class="s-body">
-        <div class="s-scan">I-scan mo <span>&#128071;</span> may schedule ka na.</div>
+        <div class="s-scan">Scan it <span>&#128071;</span> and sort it out.</div>
         <div class="s-qr"><svg viewBox="0 0 33 33"><use href="#qr"/></svg><span class="s-qseal"><img src="seal.png" alt=""></span></div>
-        <div class="s-desc">Upload your COR, get a clean, color-coded weekly schedule. Libre, walang sign-up.</div>
+        <div class="s-desc">Upload your COR, get a clean, color-coded weekly schedule. Free, no sign-up.</div>
       </div>
       <div class="s-url"><span class="dot"></span>prmsu-sched.netlify.app<span class="tag">· Free</span></div>
     </div></div>
