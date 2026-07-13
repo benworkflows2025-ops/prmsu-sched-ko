@@ -106,7 +106,6 @@
   var fab = document.createElement('div');
   fab.className = 'stat-fab';
   fab.innerHTML =
-    '<span class="sf-sincetag" title="This counter is brand new, so the numbers are still small.">New · since ' + esc(SINCE) + '</span>' +
     '<button type="button" class="sf-heart" id="sfHeart" aria-pressed="false" ' +
         'aria-label="Like this tool" title="Hearts since ' + esc(SINCE) + '. Tap to add yours.">' +
       HEART_SVG + '<span class="sf-n" id="sfHearts">–</span>' +
@@ -316,13 +315,11 @@
     sec.className = 'sf-board';
     sec.innerHTML =
       '<div class="sf-board-card">' +
-        '<div class="sf-board-top">' +
-          '<div class="sf-board-h">Which campus uses this the most? 💙</div>' +
-          '<span class="sf-since">New · since ' + esc(SINCE) + '</span>' +
-        '</div>' +
+        '<div class="sf-board-h">Which campus uses this the most? 💙</div>' +
+        '<div class="sf-board-new">Fresh feature, I only added this on ' + esc(SINCE) +
+          ', so the counts are still small and climbing.</div>' +
         '<ol class="sf-board-list">' + items + '</ol>' +
-        '<div class="sf-board-n">Just launched on ' + esc(SINCE) + ', so the numbers are still small and growing. ' +
-          'Anonymous - based on who picked their campus in the welcome popup. No names, just a count per campus.</div>' +
+        '<div class="sf-board-n">Anonymous: based on who picked their campus in the welcome popup. No names, just a count per campus.</div>' +
       '</div>';
     if (!existing) foot.parentNode.insertBefore(sec, foot);
   }
