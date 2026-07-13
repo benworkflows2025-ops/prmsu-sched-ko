@@ -21,9 +21,9 @@ create table if not exists public.site_counters (
   updated_at timestamptz not null default now()
 );
 
--- Starting (social-proof) baseline: 67 hearts, 141 views. Real taps grow it.
+-- Start clean at zero; real taps grow it.
 insert into public.site_counters (site, hearts, views)
-values ('prmsu-sched', 67, 141)
+values ('prmsu-sched', 0, 0)
 on conflict (site) do nothing;
 
 -- ---- anonymous per-campus survey -------------------------------------------
