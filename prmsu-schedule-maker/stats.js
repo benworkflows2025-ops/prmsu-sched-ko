@@ -17,9 +17,14 @@
   var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4ZmptdWZ5cGp2ZGJlYWp3dnhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5MzQxMjksImV4cCI6MjA5ODUxMDEyOX0.d4PVBSG2I0PZjmR7Ivm5xTbtlYAKZ-tW9oFiiBLowq4';
   var SITE = 'prmsu-sched';
 
-  // PRMSU campuses (from the university's campus list).
+  // When the hearts/visits/campus feature went live (shown on the board so
+  // people know the numbers are new, not low from lack of interest).
+  var SINCE = 'July 12, 2026';
+
+  // PRMSU campuses (from the university's campus list). 'Other' is a catch-all.
   var BRANCHES = ['Iba (Main Campus)', 'Botolan', 'Candelaria', 'Castillejos',
                   'Masinloc', 'San Marcelino', 'Santa Cruz', 'Other'];
+  var CAMPUSES = BRANCHES.slice(0, 7);   // the named campuses (always shown)
 
   var K = {
     hearted:  'sched_hearted',   // '1' once this browser has liked
@@ -101,11 +106,12 @@
   var fab = document.createElement('div');
   fab.className = 'stat-fab';
   fab.innerHTML =
+    '<span class="sf-sincetag" title="This counter is brand new, so the numbers are still small.">New · since ' + esc(SINCE) + '</span>' +
     '<button type="button" class="sf-heart" id="sfHeart" aria-pressed="false" ' +
-        'aria-label="Like this tool" title="Support this tool">' +
+        'aria-label="Like this tool" title="Hearts since ' + esc(SINCE) + '. Tap to add yours.">' +
       HEART_SVG + '<span class="sf-n" id="sfHearts">–</span>' +
     '</button>' +
-    '<div class="sf-views" id="sfViews" title="Ramonians who opened this tool">' +
+    '<div class="sf-views" id="sfViews" title="Visits since ' + esc(SINCE) + '">' +
       EYE_SVG + '<span class="sf-n" id="sfViewsN">–</span>' +
     '</div>';
 
@@ -272,22 +278,35 @@
   function renderBoard(rows) {
     var foot = document.querySelector('.foot');
     var existing = document.getElementById('sfBoard');
-    rows = (rows || []).filter(function (r) { return r && Number(r.responses) > 0; });
-    if (!foot || !rows.length) { if (existing) existing.parentNode.removeChild(existing); return; }
+    if (!foot) { if (existing) existing.parentNode.removeChild(existing); return; }
 
-    rows.sort(function (a, b) { return b.responses - a.responses || (b.hearts || 0) - (a.hearts || 0); });
-    var top = rows.slice(0, 10);     // show every campus (there are only a handful)
-    var max = Number(top[0].responses) || 1;
+    // index the real counts by campus
+    var byBranch = {};
+    (rows || []).forEach(function (r) { if (r && r.branch) byBranch[r.branch] = r; });
 
-    var items = top.map(function (r, i) {
-      var pct = Math.max(7, Math.round(Number(r.responses) / max * 100));
-      var hearts = Number(r.hearts) || 0;
-      return '<li class="sf-row' + (i === 0 ? ' lead' : '') + '">' +
+    // always list every named campus (0 where there is no activity yet)...
+    var list = CAMPUSES.map(function (b) {
+      var r = byBranch[b] || {};
+      return { branch: b, responses: Number(r.responses) || 0, hearts: Number(r.hearts) || 0 };
+    });
+    // ...plus "Other" only if real people actually used it
+    var other = byBranch['Other'];
+    if (other && Number(other.responses) > 0) {
+      list.push({ branch: 'Other', responses: Number(other.responses) || 0, hearts: Number(other.hearts) || 0 });
+    }
+
+    list.sort(function (a, b) { return b.responses - a.responses || (b.hearts - a.hearts); });
+    var max = Math.max(1, list[0] ? list[0].responses : 1);
+
+    var items = list.map(function (r, i) {
+      var pct = r.responses > 0 ? Math.max(7, Math.round(r.responses / max * 100)) : 0;
+      var lead = i === 0 && r.responses > 0;    // don't crown a campus that is still at 0
+      return '<li class="sf-row' + (lead ? ' lead' : '') + '">' +
         '<span class="sf-rk">' + (i + 1) + '</span>' +
         '<span class="sf-nm">' + esc(shortName(r.branch)) + '</span>' +
         '<span class="sf-track"><i style="width:' + pct + '%"></i></span>' +
         '<span class="sf-ct">' + fmt(r.responses) +
-          (hearts ? ' <span class="sf-ch">' + fmt(hearts) + '♥</span>' : '') +
+          (r.hearts ? ' <span class="sf-ch">' + fmt(r.hearts) + '♥</span>' : '') +
         '</span>' +
       '</li>';
     }).join('');
@@ -297,9 +316,13 @@
     sec.className = 'sf-board';
     sec.innerHTML =
       '<div class="sf-board-card">' +
-        '<div class="sf-board-h">Which campus uses this the most? 💙</div>' +
+        '<div class="sf-board-top">' +
+          '<div class="sf-board-h">Which campus uses this the most? 💙</div>' +
+          '<span class="sf-since">New · since ' + esc(SINCE) + '</span>' +
+        '</div>' +
         '<ol class="sf-board-list">' + items + '</ol>' +
-        '<div class="sf-board-n">Anonymous. Based on who picked their campus in the welcome popup. No names, just a count per campus.</div>' +
+        '<div class="sf-board-n">Just launched on ' + esc(SINCE) + ', so the numbers are still small and growing. ' +
+          'Anonymous - based on who picked their campus in the welcome popup. No names, just a count per campus.</div>' +
       '</div>';
     if (!existing) foot.parentNode.insertBefore(sec, foot);
   }

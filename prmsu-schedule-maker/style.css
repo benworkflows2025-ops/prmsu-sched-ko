@@ -289,7 +289,9 @@ input:focus,select:focus{outline:2px solid var(--blue);outline-offset:-1px;borde
 /* =====================================================
    FLOATING HEARTS + VISITS  (shared, from stats.js)
    ===================================================== */
-.stat-fab{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.stat-fab{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:9px}
+.sf-sincetag{font-size:10px;font-weight:700;color:#5C6B82;background:rgba(255,255,255,.95);border:1px solid var(--line);
+  border-radius:999px;padding:3px 10px;box-shadow:0 5px 14px -7px rgba(16,36,59,.5);letter-spacing:.01em}
 .sf-heart{appearance:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
   background:var(--blue);color:#fff;font:inherit;font-weight:800;font-size:14px;
   padding:10px 15px 10px 13px;border-radius:999px;
@@ -338,7 +340,9 @@ input:focus,select:focus{outline:2px solid var(--blue);outline-offset:-1px;borde
 /* ---- public campus leaderboard (transparency) ---- */
 .sf-board{max-width:1000px;margin:6px auto 0;padding:0 20px}
 .sf-board-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 18px 15px}
-.sf-board-h{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:14.5px;color:var(--ink);margin:0 0 14px}
+.sf-board-top{display:flex;align-items:center;justify-content:space-between;gap:8px 12px;margin:0 0 14px;flex-wrap:wrap}
+.sf-board-h{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:14.5px;color:var(--ink);margin:0}
+.sf-since{flex:0 0 auto;font-size:11px;font-weight:700;color:var(--gold-d);background:#FFF6E0;border:1px solid #F3DE9E;padding:4px 10px;border-radius:999px;white-space:nowrap}
 .sf-board-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
 .sf-row{display:flex;align-items:center;gap:10px;font-size:13px}
 .sf-rk{width:19px;height:19px;flex:0 0 auto;border-radius:50%;background:#EEF2F7;color:var(--muted);font-size:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
@@ -359,7 +363,7 @@ input:focus,select:focus{outline:2px solid var(--blue);outline-offset:-1px;borde
 
 /* on phones, keep the floating widget from covering the last bit of content */
 @media (max-width:600px){
-  body.has-fab{padding-bottom:92px}
+  body.has-fab{padding-bottom:118px}
 }
 @media (max-width:560px){
   .stat-fab{right:12px;bottom:12px;gap:8px}
